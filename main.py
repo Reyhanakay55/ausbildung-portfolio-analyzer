@@ -1,4 +1,15 @@
 import requests
+def get_int_input(prompt, minimum, maximum):
+    while True:
+        try:
+            value = int(input(prompt))
+            if value < minimum:
+                return minimum
+            if value > maximum:
+                return maximum
+            return value
+        except ValueError:
+            print("Please enter a valid number.")
 print("Ausbildung Portfolio Analyzer")
 german_level=input("german level: ").strip().lower()
 english_level=input("english level: ").strip().lower()
@@ -7,19 +18,32 @@ real_project_count=int(input("real project count: "))
 cv_ready = input("Professional CV ready? (yes/no): ")
 github_ready = input("GitHub and project links ready? (yes/no): ")
 target_role_clear = input("Target Ausbildung role clear? (yes/no): ")
-interview_preparation = input("Interview preparation level (0-3): ")
-application_strategy = input("Company research and application strategy level (0-3): ")
+interview_preparation = get_int_input(
+    "Interview preparation level(0-3): ", 0, 3
+)
+application_strategy = get_int_input(
+    "Company research and application strategy level (0-3): ", 0, 3
+)
 relocation_plan = input("Start date and relocation plan clear? (yes/no): ")
 it_education = input("IT-related education? (yes/no): ")
 academic_project = input("Relevant academic/technical project? (yes/no): ")
 learning_continuity = input("Actively continuing to learn? (yes/no): ")
 git_usage = input("Uses Git/GitHub regularly? (yes/no): ")
-project_quality = int(input("Real working projects score (0-8): "))
-project_diversity = int(input("Project diversity score (0-7): "))
-programming_basics = int(input("Programming fundamentals score (0-6): "))
+project_quality = get_int_input(
+    "Real working projects score (0-8): ", 0, 8
+)
+
+project_diversity = get_int_input(
+    "Project diversity score (0-7): ", 0, 7
+)
+programming_basics = get_int_input(
+    "Programing fundamentals score (0-6): ", 0, 6
+)
 api_experience = input("API experience? (yes/no): ")
 database_experience = input("Database experience? (yes/no): ")
-documentation_quality = int(input("README/documentation score (0-2): "))
+documentation_quality = get_int_input(
+    "README/documentation score (0-2): ", 0, 2
+)
 if german_level == "a2":
     german_score = 6
 elif german_level == "b1":
@@ -92,17 +116,9 @@ if target_role_clear == "yes":
 else:
     target_role_score = 0
 
-interview_score = int(interview_preparation)
-if interview_score > 3:
-    interview_score = 3
-elif interview_score < 0:
-    interview_score = 0
+interview_score = interview_preparation
 
-strategy_score = int(application_strategy)
-if strategy_score > 3:
-    strategy_score = 3
-elif strategy_score < 0:
-    strategy_score = 0
+strategy_score = application_strategy
 
 if relocation_plan == "yes":
     relocation_score = 2
@@ -124,21 +140,6 @@ if git_usage == "yes":
 else:
     git_score = 0
 
-if project_quality > 8:
-    project_quality = 8
-elif project_quality < 0:
-    project_quality = 0
-
-if project_diversity > 7:
-    project_diversity = 7
-elif project_diversity < 0:
-    project_diversity = 0
-
-if programming_basics > 6:
-    programming_basics = 6
-elif programming_basics < 0:
-    programming_basics = 0
-
 if api_experience == "yes":
     api_score = 4
 else:
@@ -148,11 +149,6 @@ if database_experience == "yes":
     database_score = 3
 else:
     database_score = 0
-
-if documentation_quality > 2:
-    documentation_quality = 2
-elif documentation_quality < 0:
-    documentation_quality = 0
 
 
 github_username = input("GitHub username: ")
