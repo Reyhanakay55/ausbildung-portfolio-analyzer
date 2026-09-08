@@ -1,7 +1,7 @@
 import requests
 print("Ausbildung Portfolio Analyzer")
-german_level=input("german level: ")
-english_level=input("english level: ")
+german_level=input("german level: ").strip().lower()
+english_level=input("english level: ").strip().lower()
 high_school_grade=float(input("high school grade: "))
 real_project_count=int(input("real project count: "))
 cv_ready = input("Professional CV ready? (yes/no): ")
