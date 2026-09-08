@@ -1,0 +1,1 @@
+print("Ausbildung Portfolio Analyzer")
